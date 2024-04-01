@@ -1,0 +1,120 @@
+.search-container {
+  position: relative;
+  width: 50%;
+  margin-left: 280px;
+  margin-top: 40px;
+ 
+}
+
+.input-container {
+
+  display: flex;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.search-button {
+ 
+  border:none;
+  padding: 10px;
+  color: #808080;
+  border:1px solid #ccc;
+  border-left: none;
+  border-radius: 0px 50px 50px 0px;
+ 
+}
+.change-search-button {
+ 
+
+  border:none;
+  padding: 10px;
+  color: #808080;
+  border:1px solid #ccc;
+  border-left: none;
+  border-radius: 0px 10px 0px 0px;
+ 
+}
+
+.search-input{
+  width: 100%;
+
+  border:1px solid #ccc;
+  padding: 10px;
+  color: #808080;
+  border-right: none;
+  border-radius: 50px 0px 0px 50px;
+ 
+  outline:none;
+}
+
+
+.change-search-input {
+  width: 100%;
+
+  border:1px solid #ccc;
+  padding: 10px;
+  color: #808080;
+  border-right: none;
+  border-radius: 10px 0px 0px 0px;
+ 
+  outline:none;
+
+}
+
+.suggestions {
+  position: absolute;
+  color: #808080;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  /* border: 1px solid #ccc; */
+  /* border-top: none; */
+  border-radius: 0 0 5px 5px;
+  z-index: 1000;
+}
+
+.suggestion {
+  padding: 10px;
+  cursor: pointer;
+}
+.change-suggestion {
+  position: absolute;
+  color: #808080;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  /* border-top: none; */
+  border-radius: 0 0 5px 5px;
+  z-index: 1000;
+}
+.suggestion:hover {
+  background-color: #f2f2f2;
+}
+
+.no-data {
+  padding: 10px;
+  margin: 0;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.css-o69gx8-MuiCardMedia-root {
+  object-fit: fill !important;
+}
+
+.searchresult-title {
+  color: #212121;
+  font-size: 14px;
+  margin-bottom: 3px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-height: 3em;
+}

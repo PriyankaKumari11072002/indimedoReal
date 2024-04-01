@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+img{
+    max-width:288px;
+    height: 288px
+}
