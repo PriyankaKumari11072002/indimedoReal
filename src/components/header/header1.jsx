@@ -15,7 +15,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useLazyGetCartQuery } from "../../services/apis/product";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductToCart } from "../../redux/features/cartSlice";
-import ResponiveHeader from "./responsiveHeader";
+
 
 const Header1 = () => {
   const dispatch = useDispatch();
@@ -43,9 +43,7 @@ const Header1 = () => {
     setIsModalOpen(false);
     setverifyPage(false);
   };
-  const handleClick = () => {
-    setIsModalOpen(false);
-  };
+ 
   useEffect(() => {
     getcartData().then((data) =>
       dispatch(addProductToCart(data?.data?.products))
@@ -63,17 +61,17 @@ const Header1 = () => {
   }, [verifyPage, loginPage]);
 
   const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
+ 
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "60%",
+    //  width: "70%",
     bgcolor: "background.paper",
 
     boxShadow: 24,
-    p: 4,
+    p:4,
   };
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -87,9 +85,7 @@ const Header1 = () => {
 
   return (
     <>
-      {/* <ResponiveHeader/> */}
-      {/* <Login/> */}
-
+  
       <div className="hidden sm:block text-red-500  bg-slate-100">
         <div className="flex justify-between items-center bg-white text-black border-b p-3 shadow transition duration-300 ease-in h-20  ">
           <div className="ml-4">
@@ -144,7 +140,7 @@ const Header1 = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box sx={style}  className="sm:w-[70%]   lg:w-[60%]">
               <div
                 className="  flex justify-around items-center  "
                 style={{ padding: "10px 40px" }}
@@ -161,7 +157,7 @@ const Header1 = () => {
 
                   <div>
                     <h1>Welcome to Indimedo website</h1>
-                    <p className="w-[100%]">
+                    <p className="w-[85%]">
                       Sign up with us get exclusive offers,discounts and savings
                       on medicine ,get express delivery on same day
                     </p>

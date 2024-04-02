@@ -11,6 +11,7 @@ import Header1 from "./components/header/header1";
 import Example1 from "./components/trial/example";
 import Signup from "./screens/Signup/signup.jsx/Signup";
 import Login from "./screens/login/login";
+import ResponsiveProductCardDetail from "./screens/productCardDetails/responsiveAddToCart";
 const ProductCard = React.lazy(() => import("./ProductCard/ProductCard"));
 const Home = React.lazy(() => import("./screens/home/Home"));
 const SearchResults = React.lazy(() => import("./components/search/searchResults"));
@@ -31,8 +32,11 @@ export default function App() {
         <Navbar/>
          <Search1/>
          <Header1 /> */}
+          <ResponsiveProductCardDetail/>
            <Header1 /> 
         <Example1/>
+       
+       
         </div>
     
     

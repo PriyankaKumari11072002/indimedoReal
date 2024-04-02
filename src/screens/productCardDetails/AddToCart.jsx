@@ -70,7 +70,7 @@ const AddToCart = ({ data }) => {
   return (
     <>
       {!viewCartOpen ? (
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: 275 ,marginBottom:"30px"}}  className="">
           <CardContent>
             <Typography
               sx={{ fontSize: 14, backgroundColor: "" }}
@@ -90,7 +90,7 @@ const AddToCart = ({ data }) => {
                 style={{
                   cursor: "pointer",
                   textDecoration: "underline",
-                  marginLeft: "5px",
+                  marginLeft: "500px",
                 }}
                 onClick={toggleTitleExpansion}
               >

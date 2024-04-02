@@ -1,8 +1,31 @@
 
 import React from "react";
 import { Box, TextField } from "@mui/material";
+import { useState } from "react";
 
 const Login = ({ loginPage, signup, verifyPage, setverifyPage, redirectSignupPage}) => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [error, setError] = useState("");
+
+  const handleContinue = () => {
+const phoneRegex = /^[6-9]\d{9}$/;
+  
+    if (!phoneRegex.test(phoneNumber)) {        //5546948976
+      setError("Please enter a valid phone number ");
+      setverifyPage(false); 
+    } else {
+      setError("");
+      setverifyPage(true); 
+    }
+  };
+ 
+//   const boolen = true
+//   if(!true){
+// console.log(true,'true')
+//   }else{
+//     console.log(false,'false')
+//   }
+
   return (
     <div>
 
@@ -24,17 +47,20 @@ const Login = ({ loginPage, signup, verifyPage, setverifyPage, redirectSignupPag
                 id="standard-basic"
                 label="Enter Email Id or Mobile Number"
                 variant="standard"
+                value={phoneNumber}
+                onChange={(e)=>setPhoneNumber(e.target.value)}
               />
 
-
+{error && <p style={{ color: 'red' }}>{error}</p>}
               <button
-                onClick={() => setverifyPage(true)}
+                onClick={handleContinue}
                 type="button"
                 className="w-[100%] bg-sky-500 p-2 text-black"
               >
                 Continue
               </button>
               
+
               <p>
                 New on Indimedo Website?{" "}
                 </p>
@@ -43,7 +69,9 @@ const Login = ({ loginPage, signup, verifyPage, setverifyPage, redirectSignupPag
                   Sign Up
                 </div>
               <p>
+
               By signing up, I agree to the Privacy Policy,Terms and Conditions of Indimedo Website.
+
               </p>
             </Box>
           </div>

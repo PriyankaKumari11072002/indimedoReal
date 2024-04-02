@@ -7,8 +7,6 @@ import { IoSearchOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchTerm1 ,setQueryResults } from "../../redux/features/searchSlice";
 
-import { IconButton, Paper } from "@mui/material";
-import {Search} from '@mui/icons-material'
 const Search1 = () => {
 
   const [suggestionTitleId, setsuggestionTitleId] = useState("");

@@ -11,7 +11,7 @@ const ProductDescriptionAndBenifits = ({ data }) => {
   //    console.log(data.title,'datades')
 
   return (
-    <Card style={{ width: "100%" }}>
+    <Card style={{ width: "100%" ,padding:'10px'}}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.dark" gutterBottom>
           {data?.title}
@@ -22,37 +22,37 @@ const ProductDescriptionAndBenifits = ({ data }) => {
           {data?.description}
         </Typography>
 
-        <Typography variant="body2">
+        <Typography variant="body2"  className="pt-2"  >
           Key Ingredients:
-          <ul>
+        
             {data?.ingredients.map((ingredients,id) => (
+                <ul  className="list-disc mt-1">
               <li key={id}>{ingredients}</li>
+              </ul>
+            ))}
+         
+          <br />
+        </Typography>
+        <Typography variant="body2"  className="pt-2" >
+          Key Benefits:
+          <ul  className="list-disc  mt-1">
+            {data?.highlights.map((highlights,id) => (
+              <li key={id}>{highlights}</li>
             ))}
           </ul>
           <br />
         </Typography>
-        <Typography variant="body2">
-          Key Benefits:
-          <ol>
-            {data?.highlights.map((highlights,id) => (
-              <li key={id}>{highlights}</li>
-            ))}
-          </ol>
-          <br />
-        </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2"   className="pt-2" >
           Directions For Use:{" "}
-          <ol>
+          <ul  className="list-disc  mt-1">
             {data?.directions_for_Use.map((directions,id) => (
-              <li  key={id}>{directions}</li>
+              <li  key={id}  >{directions}</li>
             ))}
-          </ol>
+          </ul>
           <br />
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
+     
     </Card>
   );
 };

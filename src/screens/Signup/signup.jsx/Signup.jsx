@@ -1,5 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 const Signup = ({
   signup,
@@ -9,6 +10,22 @@ const Signup = ({
   setverifyPage,
   redirectloginPage
 }) => {
+
+  const [error, setError] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const handleContinue = () => {
+const phoneRegex = /^[6-9]\d{9}$/;
+  
+    if (!phoneRegex.test(phoneNumber)) {      
+      setError("Please enter a valid phone number ");
+      setverifyPage(false); 
+    } else {
+      setError("");
+      setverifyPage(true); 
+    }
+  };
+ 
+
   return (
     <>
       <div>
@@ -31,10 +48,12 @@ const Signup = ({
                   id="standard-basic"
                   label="Enter Email Id or Mobile Number"
                   variant="standard"
+                  value={phoneNumber}
+                  onChange={(e)=>setPhoneNumber(e.target.value)}
                 />
-
+{error && <p style={{ color: 'red' }}>{error}</p>}
                 <button
-                  onClick={() => setverifyPage(true)}
+                  onClick={handleContinue}
                   type="button"
                   className="w-[100%] bg-sky-500 p-2 text-black"
                 >
