@@ -54,7 +54,8 @@ const AddToCart = ({ data }) => {
  
 //console.log(data.data,'.....data')
 
-  dispatch(addProductToCart(data?.data))
+  //dispatch(addProductToCart(data?.data))
+  dispatch(addProductToCart(data?.data.product))
         )
       );
     } catch (error) {
