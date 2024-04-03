@@ -34,11 +34,8 @@ const ProductCardDetails = () => {
 
 
       <div
-        className="   mt-10   w-[85%]   md:pl-[10px !important] lg:pl-20
-        
-        
-        hidden md:block"
-        style={{display:'flex',justifyContent:'center',alignItems:"center"}}
+        className="   mt-10   w-[85%]   "
+        style={{display:'flex',justifyContent:'space-around',alignItems:"center"}}
       >
 
         <div className="flex justify-around align-middle  "    >

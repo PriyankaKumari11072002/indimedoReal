@@ -160,11 +160,26 @@ export default function Example1() {
   const dispatch = useDispatch()
   const [open1, setOpen1] = useState(false);
   const {count} = useSelector((state)=>state.cart) 
-
+  const [isSignUp, setIsSignUp] = useState(true);
   const [loginPage, setloginPage] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [verifyPage, setverifyPage] = useState(false);
   const [signup, setsignup] = useState(false);
-  
+  const handleSignUpClick = () => {
+    setIsModalOpen(true);
+
+    setIsSignUp(true);
+  };
+
+  const handleLoginClick = () => {
+    setIsModalOpen(true);
+    setIsSignUp(false);
+  };
+  const handleClose = () => {
+    setIsModalOpen(false);
+    setverifyPage(false);
+  };
+
   const [getcartData,{data,isLoading,isError}] = useLazyGetCartQuery()
    
   useEffect(()=>{
@@ -180,7 +195,7 @@ export default function Example1() {
   }, [verifyPage, loginPage]);
 
   const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
   const style = {
       position: 'absolute',
       top: '50%',
@@ -204,8 +219,9 @@ export default function Example1() {
   return (
     <div className="bg-white">
       {/* Mobile menu */}
-      <Transition.Root show={open1} as={Fragment}>
-        <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen1}>
+
+      <Transition.Root show={open1} as={Fragment}  className="">
+        <Dialog as="div" className="relative z-40   lg:hidden" onClose={setOpen1}>
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -282,7 +298,10 @@ export default function Example1() {
         </Dialog>
       </Transition.Root>
 
-      <header className="relative bg-white">
+
+
+
+      <header className="relative bg-white ">
        
 
         <nav aria-label="Top" className="">
@@ -290,12 +309,12 @@ export default function Example1() {
             <div className="flex h-16 items-center">
               <button
                 type="button"
-                className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                className="relative rounded-md bg-white p-2 text-gray-400 md:hidden  "
                 onClick={() => setOpen1(true)}
               >
                 <span className="absolute -inset-0.5" />
                 <span className="sr-only">Open menu</span>
-                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                <Bars3Icon className=" h-6 w-6" aria-hidden="true" />
               </button>
 
               {/* Logo */}
@@ -312,110 +331,11 @@ export default function Example1() {
                 </Link>
               </div>
 
-              {/* Flyout menus */}
-              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-                <div className="flex h-full space-x-8">
-                  {navigation.categories.map((category) => (
-                    <Popover key={category.name} className="flex">
-                      {({ open1 }) => (
-                        <>
-                          <div className="relative flex">
-                            <Popover.Button
-                              className={classNames(
-                                open1
-                                  ? 'border-indigo-600 text-indigo-600'
-                                  : 'border-transparent text-gray-700 hover:text-gray-800',
-                                'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
-                              )}
-                            >
-                              {category.name}
-                            </Popover.Button>
-                          </div>
-
-                          <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-200"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                            leave="transition ease-in duration-150"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                          >
-                            <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500">
-                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                              <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
-
-                              <div className="relative bg-white">
-                                <div className="mx-auto max-w-7xl px-8">
-                                  <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
-                                    <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                      {category.featured.map((item) => (
-                                        <div key={item.name} className="group relative text-base sm:text-sm">
-                                          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                            <img
-                                              src={item.imageSrc}
-                                              alt={item.imageAlt}
-                                              className="object-cover object-center"
-                                            />
-                                          </div>
-                                          <a href={item.href} className="mt-6 block font-medium text-gray-900">
-                                            <span className="absolute inset-0 z-10" aria-hidden="true" />
-                                            {item.name}
-                                          </a>
-                                          <p aria-hidden="true" className="mt-1">
-                                            Shop now
-                                          </p>
-                                        </div>
-                                      ))}
-                                    </div>
-                                    <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
-                                      {category.sections.map((section) => (
-                                        <div key={section.name}>
-                                          <p id={`${section.name}-heading`} className="font-medium text-gray-900">
-                                            {section.name}
-                                          </p>
-                                          <ul
-                                            role="list"
-                                            aria-labelledby={`${section.name}-heading`}
-                                            className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                          >
-                                            {section.items.map((item) => (
-                                              <li key={item.name} className="flex">
-                                                <a href={item.href} className="hover:text-gray-800">
-                                                  {item.name}
-                                                </a>
-                                              </li>
-                                            ))}
-                                          </ul>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </Popover.Panel>
-                          </Transition>
-                        </>
-                      )}
-                    </Popover>
-                  ))}
-
-                  {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      {page.name}
-                    </a>
-                  ))}
-                </div>
-              </Popover.Group>
-
-              <div className="ml-auto flex items-center">
-              
-
-                <div className="hidden lg:ml-8 lg:flex">
+          
+              <div className=" ml-auto items-center   hidden md:flex ">
+             
+              {/* <div  className="  ">    </div>  */}
+                <div className="lg:ml-8 lg:flex  ">
                 <Link to="/offers" className="flex items-center text-gray-700 hover:text-gray-800"> 
                   
                   
@@ -427,11 +347,11 @@ export default function Example1() {
                  </Link> 
                 </div>
 
-                <div className="hidden lg:ml-8 lg:flex">
+                <div className=" lg:ml-8 lg:flex  ">
                 <Link to="/cart" className="flex items-center text-gray-700 hover:text-gray-800"> 
                   
-                      <StyledBadge badgeContent={count} color="secondary">
-                    <ShoppingCartIcon/>
+                      <StyledBadge badgeContent={count} color="secondary" >
+                    <ShoppingCartIcon className="md:ml-4  lg:ml-0" />
                     </StyledBadge>
     
                     <span className="ml-3 block text-sm font-medium">Cart</span>
@@ -439,77 +359,113 @@ export default function Example1() {
                  </Link> 
 
 
-                 <Link to="" className="flex items-center text-gray-700 hover:text-gray-800"> 
-                 <FaUser className="ml-4"  />
-                 <span className="ml-1 block text-sm font-medium"  onClick={handleOpen}>Signup/Signin</span>
-                 </Link> 
+                 
                  </div>
+<div  className="  ">
+<Link to="" className="flex items-center text-gray-700 hover:text-gray-800   "> 
+                 <FaUser className="ml-4"  />
+                 <span className="ml-1 block text-sm font-medium"  onClick={handleSignUpClick}>Signup/</span>
+                 <span className="ml-1 block text-sm font-medium"  onClick={handleLoginClick}>Signin</span>
+
+                 </Link> 
+</div>
                  <Modal
-open={open}
-onClose={handleClose}
-aria-labelledby="modal-modal-title"
-aria-describedby="modal-modal-description"
->
-<Box sx={style}>
+            open={isModalOpen}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}  className="sm:w-[70%]   lg:w-[60%]">
+              <div
+                className="  flex justify-around items-center  "
+                style={{ padding: "10px 40px" }}
+              >
+                <div>
+                  <div>
+                    <img
+                      src="https://www.netmeds.com/images/cms/wysiwyg/cms/1680000865_New_Dest_deal.png"
+                      alt="sign-in banner"
+                      width="180px"
+                      height="200"
+                    />
+                  </div>
 
+                  <div>
+                    <h1>Welcome to Indimedo website</h1>
+                    <p className="w-[85%]">
+                      Sign up with us get exclusive offers,discounts and savings
+                      on medicine ,get express delivery on same day
+                    </p>
+                  </div>
+                </div>
 
-<div
-          className="  flex justify-around items-center  "
-          style={{ padding: "10px 40px" }}
-        >
-          <div>
-            <div>
-              <img
-                src="https://www.netmeds.com/images/cms/wysiwyg/cms/1680000865_New_Dest_deal.png"
-                alt="sign-in banner"
-                width="180px"
-                height="200"
-              />
-            </div>
+                <div>
+                  {isSignUp ? (
+                    <>
+                      <Signup
+                        signup={signup}
+                        setloginPage={setloginPage}
+                        loginPage={loginPage}
+                        memorizeLoginPage={memorizeLoginPage}
+                        verifyPage={verifyPage}
+                        setverifyPage={setverifyPage}
+                        setsignup={setsignup}
+                        redirectloginPage={handleLoginClick}
+                      />{" "}
+                      <LoginOtpVerify verifyPage={verifyPage} />
+                    </>
+                  ) : (
+                    <>
+                      <Login
+                        loginPage={loginPage}
+                        setloginPage={setloginPage}
+                        signup={signup}
+                        verifyPage={verifyPage}
+                        setverifyPage={setverifyPage}
+                        setsignup={setsignup}
+                        redirectSignupPage={handleSignUpClick}
+                      />
+                      <LoginOtpVerify verifyPage={verifyPage} />
+                    </>
+                  )}
+                </div>
+              </div>
+            </Box>
 
-            <div>
-              <h1>Welcome to Indimedo website</h1>
-              <p>
-                Sign up with us get exclusive offers,discounts and savings
-                on medicine ,get express delivery on same day
-              </p>
-            </div>
+          </Modal>    
+        
           </div>
-
-
-         <Signup signup={signup} memorizeLoginPage={memorizeLoginPage}/>
-
-         <Login  loginPage={loginPage}  signup={signup}  verifyPage={verifyPage}  
-         setverifyPage={setverifyPage}  setsignup={setsignup}/>
-         
-         <LoginOtpVerify verifyPage={verifyPage}/>
-
-        </div>
-</Box>
-</Modal>            
-  
                 
                
-              
+          <div className="ml-32  flow-root md:hidden  lg:ml-6">
+                  <Link  to='/cart'>     
+                <StyledBadge badgeContent={count} color="secondary">
+                    <ShoppingCartIcon/>
+                    </StyledBadge>
+    
+                    {/* <span className="block sm:hidden  ml-3  text-sm font-medium">Cartcart</span> */}
+                    <span className="sr-only">, change currency</span>
+                 </Link> 
+                </div>
                
 
                 {/* Search */}
             
 
                 {/* Cart */}
-                <div className="ml-4 flow-root sm:hidden lg:ml-6">
-                  <Link  to='/cart'>     
-                <StyledBadge badgeContent={count} color="secondary">
-                    <ShoppingCartIcon/>
-                    </StyledBadge>
-    
-                    <span className="hidden sm:block  ml-3  text-sm font-medium">Cart</span>
-                    <span className="sr-only">, change currency</span>
-                 </Link> 
-                </div>
-              </div>
+
+               
+
+
+             
+
+
             </div>
           </div>
+
+       
+
+
         </nav>
       </header>
     </div>

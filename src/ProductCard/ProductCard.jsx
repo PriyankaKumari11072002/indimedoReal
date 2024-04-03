@@ -14,7 +14,7 @@ export function calculateDiscountPercentage(regularPrice, salePrice) {
   return (
     <>
    {/* {`/product/${item?._id}`} */}
-      <div key={product.id}>
+      <div >
       <Link  to={`/product/${product?._id}`}>
     <div className="w-100  p-2  mr-2  cursor-pointer
     bg-white  overflow-hidden shadow duration-300  hover:shadow-lg 

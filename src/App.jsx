@@ -33,7 +33,7 @@ export default function App() {
          <Search1/>
          <Header1 /> */}
           <ResponsiveProductCardDetail/>
-           <Header1 /> 
+           {/* <Header1 />  */}
         <Example1/>
        
        

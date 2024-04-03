@@ -25,30 +25,48 @@ const ProductDescriptionAndBenifits = ({ data }) => {
         <Typography variant="body2"  className="pt-2"  >
           Key Ingredients:
         
-            {data?.ingredients.map((ingredients,id) => (
+            {data?.ingredients.map((ingredients) => (
                 <ul  className="list-disc mt-1">
-              <li key={id}>{ingredients}</li>
+              <li key={data._id}>{ingredients}</li>
               </ul>
             ))}
          
           <br />
         </Typography>
-        <Typography variant="body2"  className="pt-2" >
+      
+        <Typography variant="body2"  className=" hidden md:block lg:hidden"  >
+      
+              Product benifits:
+              {data?.highlights.map((highlights)=>(
+                  <ul  className="list-disc  mt-1"  key={data._id}>  
+           <li>{highlights} </li>
+           </ul>
+              ))}
+             
+    
+            </Typography>
+
+
+        <Typography variant="body2"  className="pt-6"  >
           Key Benefits:
-          <ul  className="list-disc  mt-1">
+         
             {data?.highlights.map((highlights,id) => (
+               <ul  className="list-disc  ">
               <li key={id}>{highlights}</li>
+              </ul>
             ))}
-          </ul>
+
           <br />
         </Typography>
-        <Typography variant="body2"   className="pt-2" >
+        <Typography variant="body2"   className="pt-1" >
           Directions For Use:{" "}
-          <ul  className="list-disc  mt-1">
+       
             {data?.directions_for_Use.map((directions,id) => (
+                 <ul  className="list-disc  mt-1">
               <li  key={id}  >{directions}</li>
+              </ul>
             ))}
-          </ul>
+
           <br />
         </Typography>
       </CardContent>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {CardMedia } from '@mui/material';
+import {Card, CardMedia } from '@mui/material';
 import './productCard.css'
 const ProductDetailImages = ({clickImages , clickImagesId,data, handleImages}) => {
 
@@ -7,8 +7,9 @@ const ProductDetailImages = ({clickImages , clickImagesId,data, handleImages}) =
     <>
 
 <div>
-<div
- style={{width:"220px",height:"230px",display:"flex",justifyContent:"center",alignItems:"center",border:"2px solid yellow"}}
+<Card
+ style={{width:"220px",height:"230px",display:"flex",justifyContent:"center",alignItems:"center"}}
+ className='shadow'
  >
 
  <CardMedia
@@ -17,7 +18,7 @@ const ProductDetailImages = ({clickImages , clickImagesId,data, handleImages}) =
           image={clickImages ? clickImagesId : (data?.images_Src[0])}
           alt="green iguana"
         />
-</div>       
+</Card>       
 
 
 <div   className='flex justify-around align-middle shadow  gap-4  '  style={{width:"100%",padding:"10px",marginTop:"15px"}}>

@@ -1,35 +1,35 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { addProductToCart} from '../../redux/features/cartSlice'
+
 import { useAddMutation, useLazyGetCartQuery } from "../../services/apis/product";
 import {
   Card,
   Typography,
-  Button,
-  CardActions,
+
   CardContent,
-  Select,
-  MenuItem,
+
 } from "@mui/material";
 import { calculateDiscountPercentage } from "../../ProductCard/ProductCard";
-import VeiwCardItems from "./veiwCardItems";
-import { addProductToCart } from "../../redux/features/cartSlice";
+
+import { priceDetails, addProductToCart } from "../../redux/features/cartSlice";
 import SelectItems from "../../components/Common/Select";
+import { useNavigate } from "react-router-dom";
 
 const AddToCart = ({ data }) => {
-  const [cardData, setcardData] = useState();
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
-  // console.log(cart,'cartcount')
-  const [quantity, setQuantity] = useState(1);
-  const [productIncriment, setproductIncriment] = useState(false);
-  const [viewCartOpen, setviewCartOpen] = useState(false);
-  const [count, setCount] = useState(1);
-  const [addToCart, response] = useAddMutation();
-  const [getcartData] = useLazyGetCartQuery();
-  // const cartLength = data?.products.length
 
-  //  console.log(response,'res')
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+   const { count } = useSelector((state) => state.cart);
+
+  const [quantity, setQuantity] = useState(1);
+
+  const [viewCartOpen, setviewCartOpen] = useState(false);
+
+  const [addToCart] = useAddMutation();
+  const [getcartData,response] = useLazyGetCartQuery();
+
+ 
   const [isTitleExpanded, setIsTitleExpanded] = useState(false);
 
   const toggleTitleExpansion = () => {
@@ -37,9 +37,9 @@ const AddToCart = ({ data }) => {
   };
 
   const handleAddToCart = async (product) => {
-    //setproductIncriment(true)
-    //setviewCartOpen(true)
-    // dispatch(addProductToCart({cart:product,count:1}))
+    dispatch(priceDetails({total:10})),
+    setviewCartOpen(true)
+   
 
     try {
       await addToCart({
@@ -50,8 +50,11 @@ const AddToCart = ({ data }) => {
       
        
       }).then((item) =>
-        getcartData().then((data) =>  //updating cart data when user add or increase product data
-          dispatch(addProductToCart(data?.data?.products))
+        getcartData().then((data) =>  
+ 
+//console.log(data.data,'.....data')
+
+  dispatch(addProductToCart(data?.data))
         )
       );
     } catch (error) {
@@ -61,26 +64,16 @@ const AddToCart = ({ data }) => {
     
   };
 
-  function handleDecriment() {
-    if (count > 1) {
-      setCount(count - 1);
-    }
-  }
+  
 
   return (
     <>
       {!viewCartOpen ? (
         <Card sx={{ minWidth: 275 ,marginBottom:"30px"}}  className="">
           <CardContent>
-            <Typography
-              sx={{ fontSize: 14, backgroundColor: "" }}
-              color="text.secondary"
-              gutterBottom
-            >
-              social-cue259 people bought this recently
-            </Typography>
-            <Typography variant="p" component="div">
-              {/* {data?.title} */}
+           
+            <Typography variant="p" component="div"  className="hidden  md:hidden lg:block">
+            
               {isTitleExpanded
                 ? data?.title
                 : `${data?.title.slice(0, 50)}${
@@ -95,10 +88,13 @@ const AddToCart = ({ data }) => {
                 onClick={toggleTitleExpansion}
               >
                 {isTitleExpanded ? "Show less" : "Show more"}
+
               </span>
+
             </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              <h6 className="flex   " style={{ marginTop: "10px" }}>
+            <span  className="hidden  md:block lg:hidden m-1">{data?.title}</span>
+            <Typography sx={{ mb: 1.5 ,}} color="text.secondary">
+              <h6 className="flex   " style={{ marginTop: "15px" }}>
                 &#8377;{data?.sale_price}&nbsp;&nbsp;&nbsp;
                 <span className="text-gray-600  line-through">
                   MRF&#8377;{data?.reagular_price}
@@ -142,10 +138,17 @@ const AddToCart = ({ data }) => {
               color="text.secondary"
               gutterBottom
             >
-              social-cue259 people bought this recently
+            Total price of cart items : 
+            </Typography>
+            <Typography
+              sx={{ fontSize: 14, backgroundColor: "" }}
+              color="text.secondary"
+              gutterBottom
+            >
+           {count} Items added
             </Typography>
 
-            <button
+            <button  onClick={navigate('/cart')}
               className="  bg-[#008000]  font-sans  font-light  p-3 mt-12 text-BLACK "
               style={{
                 width: "100%",
