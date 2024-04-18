@@ -55,13 +55,12 @@ const AddToCart = ({ data }) => {
 //console.log(data.data,'.....data')
 
   //dispatch(addProductToCart(data?.data))
-  dispatch(addProductToCart(data?.data.product))
+  dispatch(addProductToCart(data?.data?.products))
         )
       );
     } catch (error) {
       console.error("Error adding item to cart:", error);
-    } finally {
-    }
+    } 
     
   };
 
